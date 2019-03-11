@@ -12,7 +12,7 @@ let now_color;
 
 
 function Point(){
-this.x = 0;
+	this.x = 0;
 	this.y = 0;
 }
 
