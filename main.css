@@ -1,0 +1,32 @@
+﻿html,body{
+    padding:0;
+    margin:0 1%;
+    user-select: none;
+}
+body{
+  width: 100vw;
+}
+#canv{
+    background-color: #27ae50;
+    border: 4px solid black;
+    display: block;
+    margin: 0 auto;
+}
+*{
+    text-align: center;
+}
+span{
+    font-size: 25px;
+    background-image: linear-gradient(to right,#0022ff, #ff374b, #FFFFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bolder;
+}
+#title{
+    margin: 15px 0 5px 0;
+}
+#info{
+    font-size: 20px;
+    font-weight: bolder;
+    margin-bottom: 5px;
+}
