@@ -197,4 +197,4 @@ window.onload = function(){
     canv.width = Cell_Size*Cell_Num
     canv.height = canv.width; 
     Draw_All();
-}
+};
