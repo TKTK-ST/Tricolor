@@ -91,7 +91,6 @@ function Click(event){
 		}
 	}
 	Draw_All();
-    	//info.innerHTML = mouse.x + ' : ' + mouse.y + '<br />' + row + ' : ' + collum;
 	if (!End_Flag()){
     	if(Math.abs(now_color) === Red){
         	now_color = Blue;
@@ -104,6 +103,7 @@ function Click(event){
 		info.innerHTML = '<font color="red">赤：' + Count_Color(Red) + '</font>' + '<font color="blue">　青：' + Count_Color(Blue) + '</font>';
     }
 }
+
 function Mouse_Move(event){
     mouse.x = event.clientX - canv.offsetLeft - Line_Width*2;
 	mouse.y = event.clientY - canv.offsetTop - Line_Width*2;
@@ -179,7 +179,7 @@ window.onload = function(){
     Board[4][3] = Red;
     Board[3][4] = Red;
     Board[4][4] = Blue;
-    now_color = 1;
+    now_color = Blue;
     canv = document.getElementById('canv');
     info = document.getElementById('info');
     canv.addEventListener('mousemove',Mouse_Move,true);
