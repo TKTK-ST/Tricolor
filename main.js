@@ -189,9 +189,9 @@ window.onload = function(){
     info = document.getElementById('info');
     canv.addEventListener('mousemove',Mouse_Move,true);
     canv.addEventListener('click',Click,true);
-    canv.addEventListener('contextmenu',(function(){
+    canv.addEventListener('contextmenu',(function(event){
         now_color *= -1;
-        Click();
+        Click(event);
     }),true);
     ctx = canv.getContext('2d');
     canv.width = Cell_Size*Cell_Num
