@@ -19,12 +19,12 @@ function Point(){
 function End_Flag(){
 	for(let i=0;i<Cell_Num;i++){
 		for(let j=0;j<Cell_Num;j++){
-			if (!Cell[i][j].Can_Put(now_color,false) || Cell[i][j].Can_Put(-now_color,false)){
-				return true;
+			if (Cell[i][j].Can_Put(now_color,false) || Cell[i][j].Can_Put(-now_color,false)){
+				return false;
 			}
 		}
     }
-    return false;
+    return true;
 }
 
 function Count_Color(color){
@@ -189,9 +189,9 @@ window.onload = function(){
     info = document.getElementById('info');
     canv.addEventListener('mousemove',Mouse_Move,true);
     canv.addEventListener('click',Click,true);
-    canv.addEventListener('contextmenu',(function(event){
+    canv.addEventListener('contextmenu',(function(){
         now_color *= -1;
-        Click(event);
+        Click();
     }),true);
     ctx = canv.getContext('2d');
     canv.width = Cell_Size*Cell_Num
