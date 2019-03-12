@@ -191,5 +191,7 @@ window.onload = function(){
     ctx = canv.getContext('2d');
     canv.width = Cell_Size*Cell_Num
     canv.height = canv.width; 
+    canv.style.width = `${canv.width}px`;
+    canv.style.height = `${canv.width}px`;
     Draw_All();
 }
