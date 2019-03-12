@@ -72,6 +72,7 @@ function Draw_Line(num){
 }
 
 function Click(event){
+	Mouse_Move(event);
 	let row,collum;
 	for(let i = 1; i <= Cell_Num; i++){
 		if(Cell_Size*(i-1) <= mouse.x && Cell_Size*i >mouse.x){
@@ -86,7 +87,10 @@ function Click(event){
 		}
 	}
 	if(row >= 0 && row < Cell_Num && collum >= 0 && collum < Cell_Num){
-        if (!Cell[row][collum].Can_Put(now_color)) return;
+        if (!Cell[row][collum].Can_Put(now_color)){
+			now_color = Math.abs(now_color);	
+			return;
+		}
 	}
 	Draw_All();
     //info.innerHTML = mouse.x + ' : ' + mouse.y + '<br />' + row + ' : ' + collum;
