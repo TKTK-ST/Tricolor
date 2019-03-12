@@ -3,7 +3,6 @@ const Cell_Size = 90;
 const Msg_Box_Size = 80;
 const Cell_Num = 8;
 const Line_Width = 4;
-const fps = 10;
 let mouse = new Point();
 let Cell = [],Board = [];
 const Blue = 1, Red = 2, Empty = 0;
@@ -17,14 +16,14 @@ function Point(){
 }
 
 function End_Flag(){
-	for(let i=0;i<Cell_Num;i++){
-		for(let j=0;j<Cell_Num;j++){
-			if (!Cell[i][j].Can_Put(now_color,false) || Cell[i][j].Can_Put(-now_color,false)){
-				return true;
+	for(let i = 0; i < Cell_Num; i++){
+		for(let j = 0; j < Cell_Num; j++){
+			if (Cell[i][j].Can_Put(now_color,false) || Cell[i][j].Can_Put(-now_color,false)){
+				return false;
 			}
 		}
     }
-    return false;
+    return true;
 }
 
 function Count_Color(color){
@@ -51,7 +50,6 @@ function Draw_All(){
 			}
 		}
     }
-    //setTimeout(arguments.callee,fps);
 }
 
 function Draw_Line(num){
@@ -93,8 +91,7 @@ function Click(event){
 		}
 	}
 	Draw_All();
-    //info.innerHTML = mouse.x + ' : ' + mouse.y + '<br />' + row + ' : ' + collum;
-    if (!End_Flag()){
+	if (!End_Flag()){
     	if(Math.abs(now_color) === Red){
         	now_color = Blue;
         	info.innerHTML = '<font color="blue">青</font>のターン';
@@ -102,10 +99,11 @@ function Click(event){
         	now_color = Red;
         	info.innerHTML = '<font color="red">赤</font>のターン';
     	}
-    }else{
-    	info.innerHTML = '<font color="red">赤：' + Count_Color(Red) + '</font>' + '<font color="blue">　青：' + Count_Color(Blue) + '</font>';
+	}else{
+		info.innerHTML = '<font color="red">赤：' + Count_Color(Red) + '</font>' + '<font color="blue">　青：' + Count_Color(Blue) + '</font>';
     }
 }
+
 function Mouse_Move(event){
     mouse.x = event.clientX - canv.offsetLeft - Line_Width*2;
 	mouse.y = event.clientY - canv.offsetTop - Line_Width*2;
@@ -168,9 +166,6 @@ class Box{
 }
 
 
-
-
-
 window.onload = function(){
     for(let i=0;i<Cell_Num;i++){
     	Board[i] = [];
@@ -184,7 +179,7 @@ window.onload = function(){
     Board[4][3] = Red;
     Board[3][4] = Red;
     Board[4][4] = Blue;
-    now_color = 1;
+    now_color = Blue;
     canv = document.getElementById('canv');
     info = document.getElementById('info');
     canv.addEventListener('mousemove',Mouse_Move,true);
@@ -196,5 +191,7 @@ window.onload = function(){
     ctx = canv.getContext('2d');
     canv.width = Cell_Size*Cell_Num
     canv.height = canv.width; 
+    canv.style.width = `${canv.width}px`;
+    canv.style.height = `${canv.width}px`;
     Draw_All();
 };
