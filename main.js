@@ -16,53 +16,34 @@ function Point(){
 	this.y = 0;
 }
 
-function End_Flag(){
-	for(let i=0;i<Cell_Num;i++){
-		for(let j=0;j<Cell_Num;j++){
-			if (Cell[i][j].Can_Put(now_color,false) || Cell[i][j].Can_Put(-now_color,false)){
-				return false;
-			}
-		}
-    }
-    return true;
-}
-
-function Count_Color(color){
-    let num = 0;
-
-    for(let i =0; i < Cell_Num; i++){
-		for(let j = 0; j < Cell_Num; j++){
-			if (Board[i][j] === color){
-				num++;
-			}
-		}
-    }
-    return num;
-}
-
 function Draw_All(){
     // screenクリア
 	ctx.clearRect(0, 0, canv.width, canv.height);
     Draw_Line();        
-    for(let i=0; i<Cell_Num; i++){
+    for(let i=0;i<Cell_Num;i++){
 		for(let j=0;j<Cell_Num;j++){
 			if (Board[i][j] != Empty && Board[i][j] <= 2){
 				Cell[i][j].Draw_Piece(Board[i][j]);
 			}
 		}
     }
-    //setTimeout(arguments.callee,fps);
+    //setTimeout(arguments.callee,fps);   
+    if(now_color === 1){
+		info.innerHTML = '<font color="blue">青</font>のターン';
+    }else{
+    	info.innerHTML = '<font color="red">赤</font>のターン';
+    }
 }
 
 function Draw_Line(num){
-    for(let i = 1; i < Cell_Num; i++){
+    for(let i=1;i<Cell_Num;i++){
         ctx.beginPath();
         ctx.lineWidth = Line_Width;
         ctx.moveTo(Cell_Size*i,0)
         ctx.lineTo(Cell_Size*i,canv.height);
         ctx.stroke();
     }
-    for(let i = 1; i < Cell_Num; i++){
+    for(let i=1;i<Cell_Num;i++){
         ctx.beginPath();
         ctx.lineWidth = Line_Width;
         ctx.moveTo(0,Cell_Size*i)
@@ -72,39 +53,29 @@ function Draw_Line(num){
 }
 
 function Click(event){
-	Mouse_Move(event);
 	let row,collum;
-	for(let i = 1; i <= Cell_Num; i++){
+	for(let i=1;i<=Cell_Num;i++){
 		if(Cell_Size*(i-1) <= mouse.x && Cell_Size*i >mouse.x){
 			row = i - 1;
 			break;
 		}
 	}
-	for(let i = 1; i <= Cell_Num; i++){
+	for(let i=1;i<=Cell_Num;i++){
 		if(Cell_Size*(i-1) <= mouse.y && Cell_Size*i >mouse.y){
 			collum = i - 1;
 			break;
 		}
 	}
 	if(row >= 0 && row < Cell_Num && collum >= 0 && collum < Cell_Num){
-        if (!Cell[row][collum].Can_Put(now_color)){
-			now_color = Math.abs(now_color);	
-			return;
-		}
+        if (!Cell[row][collum].Can_Put(now_color)) return;
 	}
-	Draw_All();
     //info.innerHTML = mouse.x + ' : ' + mouse.y + '<br />' + row + ' : ' + collum;
-    if (!End_Flag()){
-    	if(Math.abs(now_color) === Red){
-        	now_color = Blue;
-        	info.innerHTML = '<font color="blue">青</font>のターン';
-    	}else{
-        	now_color = Red;
-        	info.innerHTML = '<font color="red">赤</font>のターン';
-    	}
+    if(now_color===2){
+        now_color = 1;
     }else{
-    	info.innerHTML = '<font color="red">赤：' + Count_Color(Red) + '</font>' + '<font color="blue">　青：' + Count_Color(Blue) + '</font>';
+        now_color = 2;
     }
+    Draw_All();
 }
 function Mouse_Move(event){
     mouse.x = event.clientX - canv.offsetLeft - Line_Width*2;
