@@ -3,7 +3,6 @@ const Cell_Size = 90;
 const Msg_Box_Size = 80;
 const Cell_Num = 8;
 const Line_Width = 4;
-const fps = 10;
 let mouse = new Point();
 let Cell = [],Board = [];
 const Blue = 1, Red = 2, Empty = 0;
@@ -17,8 +16,8 @@ function Point(){
 }
 
 function End_Flag(){
-	for(let i=0;i<Cell_Num;i++){
-		for(let j=0;j<Cell_Num;j++){
+	for(let i = 0; i < Cell_Num; i++){
+		for(let j = 0; j < Cell_Num; j++){
 			if (Cell[i][j].Can_Put(now_color,false) || Cell[i][j].Can_Put(-now_color,false)){
 				return false;
 			}
@@ -51,7 +50,6 @@ function Draw_All(){
 			}
 		}
     }
-    //setTimeout(arguments.callee,fps);
 }
 
 function Draw_Line(num){
@@ -93,8 +91,8 @@ function Click(event){
 		}
 	}
 	Draw_All();
-    //info.innerHTML = mouse.x + ' : ' + mouse.y + '<br />' + row + ' : ' + collum;
-    if (!End_Flag()){
+    	//info.innerHTML = mouse.x + ' : ' + mouse.y + '<br />' + row + ' : ' + collum;
+	if (!End_Flag()){
     	if(Math.abs(now_color) === Red){
         	now_color = Blue;
         	info.innerHTML = '<font color="blue">青</font>のターン';
@@ -102,8 +100,8 @@ function Click(event){
         	now_color = Red;
         	info.innerHTML = '<font color="red">赤</font>のターン';
     	}
-    }else{
-    	info.innerHTML = '<font color="red">赤：' + Count_Color(Red) + '</font>' + '<font color="blue">　青：' + Count_Color(Blue) + '</font>';
+	}else{
+		info.innerHTML = '<font color="red">赤：' + Count_Color(Red) + '</font>' + '<font color="blue">　青：' + Count_Color(Blue) + '</font>';
     }
 }
 function Mouse_Move(event){
@@ -166,9 +164,6 @@ class Box{
         }
     }
 }
-
-
-
 
 
 window.onload = function(){
