@@ -19,12 +19,12 @@ function Point(){
 function End_Flag(){
 	for(let i=0;i<Cell_Num;i++){
 		for(let j=0;j<Cell_Num;j++){
-			if (Cell[i][j].Can_Put(now_color,false) && Cell[i][j].Can_Put(-now_color,false)){
-				return false;
+			if (!Cell[i][j].Can_Put(now_color,false) && Cell[i][j].Can_Put(-now_color,false)){
+				return true;
 			}
 		}
     }
-    return true;
+    return false;
 }
 
 function Count_Color(color){
